@@ -20,7 +20,7 @@ Batch downloader for official Formula 1 session data via the [fastf1](https://gi
 ## Installation
 
 ```bash
-git clone https://github.com/<your-username>/fastf1_data.git
+git clone https://github.com/daffa-agra/fastf1_data.git
 cd fastf1_data
 pip install -r requirements.txt
 ```
