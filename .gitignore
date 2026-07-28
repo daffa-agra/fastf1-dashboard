@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+f1_cache/
+f1_*_all_data/
+f1_*_laps_csv/
+*.csv
+.DS_Store
+Thumbs.db
