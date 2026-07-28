@@ -25,6 +25,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Test connectivity to F1 data source
+        run: |
+          curl -v https://livetiming.formula1.com/static/ 2>&1 | head -50
+
       - name: Fetch latest race
         env:
           SEASON: "2026"
