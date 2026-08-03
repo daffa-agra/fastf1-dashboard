@@ -1,22 +1,17 @@
 {{ config(materialized='table', schema='gold_f1_db') }}
 
-WITH w AS (
-    SELECT
-        {{ parse_timedelta_seconds('time_raw') }} AS t_sec,
-        rainfall, air_temp, track_temp, humidity_pct, wind_speed_ms
-    FROM {{ ref('silver_weather') }}
-),
-laps_w AS (
+WITH laps_w AS (
     SELECT
         l.season, l.round_number, l.event_name, l.session_type,
         l.driver_number, l.driver_code, l.team,
         l.lap_number, l.lap_time_sec, l.lap_start_date,
         w.rainfall, w.air_temp, w.track_temp, w.humidity_pct, w.wind_speed_ms
     FROM {{ ref('fact_lap') }} l
-    LEFT JOIN w
-      ON ABS(w.t_sec - l.session_time_sec) = (
-          SELECT MIN(ABS(w2.t_sec - l.session_time_sec))
-          FROM w w2
+    LEFT JOIN {{ ref('silver_weather') }} w
+      ON w.time_sec = (
+          SELECT MAX(w2.time_sec)
+          FROM {{ ref('silver_weather') }} w2
+          WHERE w2.time_sec <= l.session_time_sec
       )
 )
 SELECT
