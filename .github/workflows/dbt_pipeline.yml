@@ -19,10 +19,10 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dbt-duckdb
+      - name: Install dbt-duckdb and pin DuckDB version
         run: |
           pip install --upgrade pip
-          pip install dbt-duckdb
+          pip install dbt-duckdb duckdb==1.5.4
 
       - name: Install dbt packages (dbt deps)
         run: dbt deps
