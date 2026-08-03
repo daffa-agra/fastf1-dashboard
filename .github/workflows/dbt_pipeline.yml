@@ -21,10 +21,10 @@ jobs:
 
       - name: Install dbt-duckdb
         run: |
+          pip install --upgrade pip
           pip install dbt-duckdb
-          pip install dbt-utils  # Required for the generate_surrogate_key macro
 
-      - name: Run dbt deps
+      - name: Install dbt packages (dbt deps)
         run: dbt deps
 
       - name: Run dbt models
