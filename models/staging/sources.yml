@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: bronze_f1
+    database: f1_db          # MotherDuck database name
+    schema: bronze_f1_db      # Schema where raw bronze tables live
+    description: "Raw FastF1 ingested data."
+    tables:
+      - name: laps
+      - name: telemetry
+      - name: weather
+      - name: messages
+      - name: race_control_messages

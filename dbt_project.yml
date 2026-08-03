@@ -1,0 +1,27 @@
+name: 'f1_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+profile: 'f1_dbt'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  f1_dbt_project:
+    staging:
+      +materialized: view
+    silver:
+      +materialized: table
+      +schema: silver_f1_db
+    gold:
+      +materialized: table
+      +schema: gold_f1_db
+
+# packages.yml
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.1.1

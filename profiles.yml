@@ -1,0 +1,10 @@
+# profiles.yml
+f1_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "md:f1_db"  # Connects to MotherDuck database 'f1_db'
+      threads: 4
+      options:
+        motherduck_token: "{{ env_var('MOTHERDUCK_TOKEN') }}"
