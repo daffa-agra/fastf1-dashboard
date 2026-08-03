@@ -15,6 +15,7 @@ SELECT
     lap_number, stint, lap_start_date,
 
     lap_time_sec,
+    session_time_sec,  -- ADDED THIS LINE
     sector1_time_sec, sector2_time_sec, sector3_time_sec,
     speed_i1, speed_i2, speed_fl, speed_st,
 
