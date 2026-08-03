@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: silver_laps
+    description: "Cleaned lap-level data with typed columns and parsed timedeltas."
+    columns:
+      - name: lap_key
+        tests: [not_null, unique]
+      - name: season
+        tests: [not_null]
+      - name: round_number
+        tests: [not_null]
+      - name: driver_number
+        tests: [not_null]
+      - name: lap_number
+        tests: [not_null]
+
+  - name: silver_telemetry
+    description: "Cleaned high-frequency telemetry data."
+    columns:
+      - name: telemetry_key
+        tests: [not_null, unique]
+
+  - name: silver_weather
+    description: "Cleaned weather data per session."
+
+  - name: silver_race_control_messages
+    description: "Cleaned race control messages consolidated from messages + race_control_messages."

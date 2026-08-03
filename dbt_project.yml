@@ -1,0 +1,31 @@
+name: 'f1_dbt_project'
+version: '1.0.0'
+config-version: 2
+
+profile: 'f1_dbt'
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  f1_dbt_project:
+    staging:
+      +materialized: view
+      +schema: bronze
+    silver:
+      +materialized: table
+      +schema: silver
+      +tags: ["silver"]
+    gold:
+      +materialized: table
+      +schema: gold
+      +tags: ["gold"]
+      dimensions:
+        +tags: ["dimension"]
+      facts:
+        +tags: ["fact"]
+      aggregates:
+        +tags: ["aggregate"]

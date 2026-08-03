@@ -1,0 +1,8 @@
+f1_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: './f1_analytics.duckdb'
+      threads: 8
+      schema: main
