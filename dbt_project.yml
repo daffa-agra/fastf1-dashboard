@@ -14,18 +14,14 @@ models:
   f1_dbt_project:
     staging:
       +materialized: view
-      +schema: bronze
     silver:
       +materialized: table
-      +schema: silver
-      +tags: ["silver"]
+      +schema: silver_f1_db
     gold:
       +materialized: table
-      +schema: gold
-      +tags: ["gold"]
-      dimensions:
-        +tags: ["dimension"]
-      facts:
-        +tags: ["fact"]
-      aggregates:
-        +tags: ["aggregate"]
+      +schema: gold_f1_db
+
+# packages.yml
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.1.1

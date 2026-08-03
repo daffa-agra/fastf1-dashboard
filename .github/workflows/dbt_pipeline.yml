@@ -1,0 +1,43 @@
+name: Run F1 dbt Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual triggering from the GitHub UI
+
+jobs:
+  run_dbt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dbt-duckdb
+        run: |
+          pip install dbt-duckdb
+          pip install dbt-utils  # Required for the generate_surrogate_key macro
+
+      - name: Run dbt deps
+        run: dbt deps
+
+      - name: Run dbt models
+        env:
+          MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
+        run: dbt run --profiles-dir .
+
+      - name: Run dbt tests
+        env:
+          MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
+        run: dbt test --profiles-dir .
+
+      - name: Generate dbt docs
+        env:
+          MOTHERDUCK_TOKEN: ${{ secrets.MOTHERDUCK_TOKEN }}
+        run: dbt docs generate --profiles-dir .
